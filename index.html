@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Check Template</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .check-container {
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .check {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background-color: #fff;
+            border: 1px solid #2a5793;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Security background pattern - simulated */
+        .check::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(220, 220, 255, 0.2),
+                rgba(220, 220, 255, 0.2) 10px,
+                rgba(200, 200, 255, 0.3) 10px,
+                rgba(200, 200, 255, 0.3) 20px
+            );
+            border-radius: 10px;
+            z-index: 0;
+        }
+        
+        .check-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .company-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        
+        .logo-bar {
+            height: 3px;
+            background-color: #000;
+        }
+        
+        .logo-bar:nth-child(1) {
+            width: 30px;
+        }
+        
+        .logo-bar:nth-child(2) {
+            width: 25px;
+        }
+        
+        .logo-bar:nth-child(3) {
+            width: 30px;
+        }
+        
+        .company-details h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .company-details p {
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .bank-info {
+            text-align: center;
+        }
+        
+        .bank-info p {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        
+        .check-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .payee-section {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .payee-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .payee-line {
+            display: flex;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .payee-label {
+            width: 120px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .payee-value {
+            flex-grow: 1;
+            border-bottom: 1px solid #000;
+            height: 25px;
+        }
+        
+        .amount-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dollar-sign {
+            font-size: 18px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .amount-box {
+            width: 150px;
+            height: 30px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+        
+        .amount-words {
+            width: 100%;
+            border-bottom: 1px solid #000;
+            margin-top: 5px;
+            margin-bottom: 40px;
+            height: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .amount-words::after {
+            content: "DOLLARS";
+            position: absolute;
+            right: 0;
+            bottom: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .memo-line {
+            display: flex;
+            width: 45%;
+        }
+        
+        .memo-label {
+            width: 60px;
+            font-size: 12px;
+        }
+        
+        .memo-value {
+            flex-grow: 1;
+            border-bottom: 1px solid #000;
+        }
+        
+        .signature-line {
+            width: 45%;
+            border-bottom: 1px solid #000;
+        }
+        
+        .signature-text {
+            text-align: center;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        
+        .security-icons {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .micr-line {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            font-family: "Courier New", monospace;
+            font-size: 18px;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+        
+        .routing-number::before,
+        .routing-number::after,
+        .account-number::before,
+        .account-number::after,
+        .check-number-micr::before,
+        .check-number-micr::after {
+            content: "⑆";
+            display: inline-block;
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="check-container">
+        <div class="check">
+            <div class="check-header">
+                <div class="header-top">
+                    <div class="company-info">
+                        <div class="logo">
+                            <div class="logo-bars">
+                                <div class="logo-bar"></div>
+                                <div class="logo-bar"></div>
+                                <div class="logo-bar"></div>
+                            </div>
+                        </div>
+                        <div class="company-details">
+                            <h3>Acme Corporation, Inc.</h3>
+                            <p>123 Business Ave.</p>
+                            <p>Anytown, NY 10001</p>
+                        </div>
+                    </div>
+                    <div class="check-number">1001</div>
+                </div>
+                <div class="bank-info">
+                    <p>First National Bank</p>
+                    <p>456 Bank Street</p>
+                    <p>Anytown, NY 10001</p>
+                    <p>12-345</p>
+                </div>
+            </div>
+            
+            <div class="payee-section">
+                <div class="payee-label">PAY TO THE ORDER OF</div>
+            </div>
+            
+            <div class="amount-section">
+                <div class="dollar-sign">$</div>
+                <div class="amount-box"></div>
+            </div>
+            
+            <div class="signature-section">
+                <div class="memo-line">
+                    <div class="memo-label">MEMO</div>
+                    <div class="memo-value"></div>
+                </div>
+                <div class="signature-line">
+                    <div class="signature-text">AUTHORIZED SIGNATURE</div>
+                </div>
+            </div>
+            
+            <div class="security-icons">
+                <span>⚜ SECURITY FEATURES INCLUDED. DETAILS ON BACK ⚜</span>
+            </div>
+            
+            <div class="micr-line">
+                <span class="routing-number">123456789</span>
+                <span class="account-number">1234567890</span>
+                <span class="check-number-micr">1001</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
